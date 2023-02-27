@@ -1,0 +1,77 @@
+Q1. Explain GET and POST methods.
+ANS The GET and POST methods are two HTTP request methods that are commonly used in web development to send data from the client (web browser) to the server.
+
+The GET method is used to request a resource from the server, typically a web page or an image file. When a user clicks on a link or enters a URL into the browser's
+address bar, a GET request is sent to the server to retrieve the resource. The data sent in a GET request is appended to the URL as a query string, which consists
+of a question mark followed by a series of key-value pairs separated by ampersands. The data sent in a GET request is visible in the URL, which can be bookmarked, shared, or cached by the browser.
+
+The POST method is used to submit data to the server, typically as part of a form submission. When a user fills out a form on a web page and clicks the submit button,
+a POST request is sent to the server with the form data in the request body. The data sent in a POST request is not visible in the URL and is usually encoded in a 
+format such as URL-encoded form data or JSON. The data sent in a POST request is not cached by the browser and is typically used to modify data on the server or to
+initiate a server-side action.
+
+In summary, the GET method is used to retrieve data from the server, while the POST method is used to submit data to the server. The GET method sends data in the
+URL query string and is typically used to retrieve data that does not modify the state of the server, while the POST method sends data in the request body and is
+typically used to modify data on the server or initiate a server-side action.
+
+
+Q2. Why is request used in Flask?
+ANS. Request is used in Flask to handle incoming HTTP requests from the client (e.g., web browser) and extract data from those requests. The request object in 
+Flask provides access to the request data, including the URL parameters, form data, cookies, and other HTTP headers.
+
+In Flask, the request object is a global object that is created automatically when a request is made to the server. This means that the request object
+is available to all view functions that handle requests, and can be used to access the request data and modify the response that is sent back to the client.
+
+
+Retrieving data from the request parameters and form data
+Accessing cookies and session data
+Handling file uploads
+Verifying the request method and other HTTP headers
+
+
+Q3. Why is redirect() used in Flask?
+ANS. The redirect() function in Flask is used to redirect the user's browser to a different URL. This function is typically used after a user has submitted a form or taken some other action that requires a change in the URL, such as a successful login or a completed purchase.
+
+When a Flask view function calls the redirect() function, the user's browser is sent a HTTP 302 status code, which tells the browser to send a new request to the URL specified in the redirect() function. The redirect() function takes the URL as its argument and can be called from any view function that handles a request.
+
+
+Redirecting a user to a different page after a successful login or registration
+Redirecting a user to an error page if an error occurs during a request
+Redirecting a user to a payment gateway to complete a purchase
+Redirecting a user to a confirmation page after a form submission
+
+
+
+Q4. What are templates in Flask? Why is the render_template() function used?
+ANS. Templates in Flask are HTML files that contain placeholders for dynamic content. They allow developers to create reusable layouts for web pages that can be customized with dynamic data from the server, such as user data, database records, or other content.
+
+The render_template() function in Flask is used to render a template and return the HTML content as a response to the client's request. This function takes the name of the template file and any context variables that need to be passed to the template as arguments.
+
+When a view function in Flask calls the render_template() function, Flask looks for the template file in the templates folder and compiles the template using the Jinja2 templating engine. Any dynamic content or control structures in the template are replaced with the corresponding data from the context variables passed to the function.
+
+Rendering dynamic content on web pages
+Creating reusable layouts and design elements for web pages
+Handling conditional logic and loops within HTML pages
+Creating custom error pages and messages
+
+
+
+Q5. Create a simple API. Use Postman to test it. Attach the screenshot of the output in the Jupyter Notebook.
+ANS. from flask import Flask, jsonify, request
+
+app = Flask(__name__)
+
+# create a simple endpoint
+@app.route('/hello', methods=['GET'])
+def hello():
+    name = request.args.get('name')
+    if name:
+        message = f'Hello, {name}!'
+    else:
+        message = 'Hello, world!'
+    return jsonify({'message': message})
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+
